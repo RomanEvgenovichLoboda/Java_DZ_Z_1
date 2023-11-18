@@ -1,20 +1,21 @@
 import java.text.MessageFormat;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
+//Организовать ввод с клавиатуры даты рождения человека, программа должна вывести знак зодиака и
+//название года по японскому календарю. Предполагаем, что пользователь всегда корректно вводит данные.
+//Пример входных данных: 5 декабря 1974 г
+//Вывод: Знак: стрелец Год: тигра
 public class Main {
     public static void main(String[] args) {
-        System.out.print("Введіть дату народження\t");
+        System.out.print("Введіть дату народження:\t");
         Scanner scanner = new Scanner(System.in);
-        String birthdateStr = scanner.nextLine();
-        StringTokenizer tokenizer = new StringTokenizer(birthdateStr);
-        String[] arr = new String[tokenizer.countTokens()];
+        String birthdayStr = scanner.nextLine();
+        StringTokenizer tokenizer = new StringTokenizer(birthdayStr);
+        String[] birthdayArray = new String[tokenizer.countTokens()];
         int item = 0;
-        while (tokenizer.hasMoreTokens()){
-            arr[item++]= tokenizer.nextToken();
-        }
-        int day = Integer.parseInt(arr[0]);
-        String month = arr[1];
+        while (tokenizer.hasMoreTokens()){ birthdayArray[item++] = tokenizer.nextToken();}
+        int day = Integer.parseInt(birthdayArray[0]);
+        String month = birthdayArray[1];
         String zodiac;
         if(month.toLowerCase().contains("груд") && day >= 22 || month.toLowerCase().contains("січ") && day <= 20){ zodiac = "Козеріг";}
         else if(month.toLowerCase().contains("січ") && day >= 21 || month.toLowerCase().contains("лют") && day <= 20){ zodiac = "Водолій";}
@@ -30,7 +31,7 @@ public class Main {
         else if(month.toLowerCase().contains("листопад") && day >= 23 || month.toLowerCase().contains("груд") && day <= 21){ zodiac = "Стрілець";}
         else { zodiac = "Помилка";}
         String year;
-        switch (Integer.parseInt(arr[2])%12){
+        switch (Integer.parseInt(birthdayArray[2]) % 12){
             case 0-> year = "Мавпи";
             case 1-> year = "Півня";
             case 2 -> year = "Собаки";
@@ -45,6 +46,6 @@ public class Main {
             case 11 -> year = "Кози";
             default -> year = "Помилка";
         }
-        System.out.println(MessageFormat.format("Знак: {0}\tРік: {1}",zodiac,year));
+        System.out.print(MessageFormat.format("\tЗнак: {0}\tРік: {1}",zodiac,year));
     }
 }
